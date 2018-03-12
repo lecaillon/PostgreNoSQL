@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgreNoSQL", "src\PostgreNoSQL\PostgreNoSQL.csproj", "{8F5F4A4A-5E0F-4EBC-A9D7-27FE8B58F58F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgreNoSQL.Tests", "test\PostgreNoSQL.Tests\PostgreNoSQL.Tests.csproj", "{D4C31039-5AB8-4FF9-9926-4CB8F489B11E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F5F4A4A-5E0F-4EBC-A9D7-27FE8B58F58F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F5F4A4A-5E0F-4EBC-A9D7-27FE8B58F58F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F5F4A4A-5E0F-4EBC-A9D7-27FE8B58F58F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F5F4A4A-5E0F-4EBC-A9D7-27FE8B58F58F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4C31039-5AB8-4FF9-9926-4CB8F489B11E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4C31039-5AB8-4FF9-9926-4CB8F489B11E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4C31039-5AB8-4FF9-9926-4CB8F489B11E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4C31039-5AB8-4FF9-9926-4CB8F489B11E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {48984E04-214E-496D-AB36-1CD0C2538873}
+	EndGlobalSection
+EndGlobal
