@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PostgreNoSQL
+﻿namespace PostgreNoSQL
 {
-    class DbContextOptions
+    public class DbContextOptions
     {
+        public string ConnectionString { get; set; }
     }
 }

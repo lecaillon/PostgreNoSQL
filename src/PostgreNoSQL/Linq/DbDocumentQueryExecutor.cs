@@ -1,19 +1,32 @@
 ﻿namespace PostgreNoSQL.Linq
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Remotion.Linq;
 
     public class DbDocumentQueryExecutor : IQueryExecutor
     {
+        private readonly DbContext _context;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="DbDocumentQueryExecutor" /> class.
+        /// </summary>
+        public DbDocumentQueryExecutor(DbContext context)
+        {
+            _context = Check.NotNull(context, nameof(context));
+            CommandBuilder = new CommandBuilder();
+        }
+
+        public CommandBuilder CommandBuilder { get; }
+
         /// <summary>
         ///     Executes a query with a collection result.
         /// </summary>
         public IEnumerable<TResult> ExecuteCollection<TResult>(QueryModel queryModel)
         {
-            new DbDocumentQueryModelVisitorBase().VisitQueryModel(queryModel);
-            throw new NotImplementedException();
+            new DbDocumentQueryModelVisitor(CommandBuilder).VisitQueryModel(queryModel);
+
+            return null;
         }
 
         /// <summary>

@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
-    using PostgreNoSQL.Internal;
     using Remotion.Linq.Clauses.Expressions;
     using Remotion.Linq.Parsing;
 
@@ -28,40 +27,46 @@
             { ExpressionType.Or, " | " }
         };
 
-        private readonly CommandBuilder _cmddBuilder = new CommandBuilder();
+        private readonly CommandBuilder _cmdBuilder;
+
+        public WhereClauseExpressionVisitor(CommandBuilder commandBuilder)
+        {
+            _cmdBuilder = Check.NotNull(commandBuilder, nameof(commandBuilder));
+            _cmdBuilder.Append(" WHERE ");
+        }
 
         protected override Expression VisitBinary(BinaryExpression expression)
         {
-            _cmddBuilder.Append("(");
+            _cmdBuilder.Append("(");
 
             Visit(expression.Left);
 
-            _cmddBuilder.Append(_operatorMap[expression.NodeType]);
+            _cmdBuilder.Append(_operatorMap[expression.NodeType]);
 
             Visit(expression.Right);
 
-            _cmddBuilder.Append(")");
+            _cmdBuilder.Append(")");
 
             return expression;
         }
 
         protected override Expression VisitQuerySourceReference(QuerySourceReferenceExpression expression)
         {
-            _cmddBuilder.Append(expression.ReferencedQuerySource.ItemName);
+            _cmdBuilder.Append(expression.ReferencedQuerySource.ItemName);
             return expression;
         }
 
         protected override Expression VisitMember(MemberExpression expression)
         {
             Visit(expression.Expression);
-            _cmddBuilder.Append($".{expression.Member.Name}");
+            _cmdBuilder.Append($".{expression.Member.Name}");
             return expression;
         }
 
         protected override Expression VisitConstant(ConstantExpression expression)
         {
-            string parameterName = _cmddBuilder.AddParameter(expression.Value);
-            _cmddBuilder.Append($"@{parameterName}");
+            string parameterName = _cmdBuilder.AddParameter(expression.Value);
+            _cmdBuilder.Append($"@{parameterName}");
             return expression;
         }
 

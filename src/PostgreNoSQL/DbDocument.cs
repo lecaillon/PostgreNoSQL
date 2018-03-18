@@ -20,7 +20,7 @@
 
             _entityQueryable = new DbDocumentQueryable<TEntity>(new DefaultQueryProvider(typeof(DbDocumentQueryable<>),
                                                                                          QueryParser.CreateDefault(),
-                                                                                         new DbDocumentQueryExecutor()));
+                                                                                         new DbDocumentQueryExecutor(context)));
         }
 
         public IEnumerator GetEnumerator() => _entityQueryable.GetEnumerator();
