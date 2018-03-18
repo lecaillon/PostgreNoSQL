@@ -1,3 +1,3 @@
 ## PostgreNoSQL
 
-PostgreNoSQL is a POC that allows you to use PostgreSQL like a nosql document database.
+PostgreNoSQL is a POC that allows you to use PostgreSQL like a nosql document-oriented database.
