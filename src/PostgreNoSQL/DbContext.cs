@@ -20,7 +20,7 @@
     /// </remarks>
     public class DbContext : IDisposable
     {
-        private readonly ConcurrentDictionary<Type, IReadOnlyList<DbSetProperty>> _cache = new ConcurrentDictionary<Type, IReadOnlyList<DbSetProperty>>();
+        private readonly ConcurrentDictionary<Type, IReadOnlyList<DbDocumentProperty>> _cache = new ConcurrentDictionary<Type, IReadOnlyList<DbDocumentProperty>>();
 
         public DbContext()
         {
@@ -29,7 +29,7 @@
 
         public virtual void InitializeSets(DbContext context)
         {
-            foreach (var setInfo in FindSets(context))
+            foreach (var setInfo in FindDocuments(context))
             {
                 setInfo.SetClrValue(this);
             }
@@ -39,9 +39,9 @@
         {
         }   
 
-        public virtual IReadOnlyList<DbSetProperty> FindSets(DbContext context) => _cache.GetOrAdd(context.GetType(), FindSets);
+        public virtual IReadOnlyList<DbDocumentProperty> FindDocuments(DbContext context) => _cache.GetOrAdd(context.GetType(), FindDocuments);
 
-        private static DbSetProperty[] FindSets(Type contextType)
+        private static DbDocumentProperty[] FindDocuments(Type contextType)
         {
             return contextType.GetRuntimeProperties()
                 .Where(
@@ -52,7 +52,7 @@
                          && (p.PropertyType.GetGenericTypeDefinition() == typeof(DbDocument<>)))
                 .OrderBy(p => p.Name)
                 .Select(
-                    p => new DbSetProperty(p))
+                    p => new DbDocumentProperty(p))
                 .ToArray();
         }
     }

@@ -4,9 +4,9 @@
     using System.Linq;
     using System.Reflection;
 
-    public class DbSetProperty
+    public class DbDocumentProperty
     {
-        public DbSetProperty(PropertyInfo propertyInfo)
+        public DbDocumentProperty(PropertyInfo propertyInfo)
         {
             Info = propertyInfo;
         }
@@ -16,7 +16,7 @@
         public Type ClrType => Info.PropertyType.GetTypeInfo().GenericTypeArguments.Single();
 
         public void SetClrValue(DbContext context) 
-            => Info.SetValue(context, Activator.CreateInstance(Info.PropertyType));
+            => Info.SetValue(context, Activator.CreateInstance(Info.PropertyType, context));
 
     }
 }

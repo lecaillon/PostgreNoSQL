@@ -11,10 +11,13 @@
 
     public class DbDocument<TEntity> : IQueryable<TEntity>, IOrderedQueryable<TEntity> where TEntity : class
     {
-        private DbDocumentQueryable<TEntity> _entityQueryable;
+        private readonly DbContext _context;
+        private readonly DbDocumentQueryable<TEntity> _entityQueryable;
 
-        public DbDocument()
+        public DbDocument(DbContext context)
         {
+            _context = Check.NotNull(context, nameof(context));
+
             _entityQueryable = new DbDocumentQueryable<TEntity>(new DefaultQueryProvider(typeof(DbDocumentQueryable<>),
                                                                                          QueryParser.CreateDefault(),
                                                                                          new DbDocumentQueryExecutor()));
