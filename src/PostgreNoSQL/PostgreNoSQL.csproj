@@ -6,10 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Npgsql" Version="3.2.7" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Query\" />
+    <PackageReference Include="Remotion.Linq" Version="2.2.0" />
   </ItemGroup>
 
 </Project>
